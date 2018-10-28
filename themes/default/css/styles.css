@@ -1,0 +1,103 @@
+body {
+	background-color: #F5F5F5;
+	color: #000000;
+	font-family: 'Actor';
+	font-size: 22px;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #999999;
+}
+
+ul {
+	list-style: none;
+	padding: 0px;
+}
+
+ul li {
+	display: inline-block;
+}
+
+.separator:before {
+	content: "\2014";
+}
+
+.rows {
+	background-color: #FFFFFF;
+	padding: 10px 15px;
+}
+
+.rows h1, .rows h2, .rows h3, .rows h4, .rows h5, .rows h6, .rows p, .rows span {
+	margin-left: 15px;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 3fr 8fr;
+	grid-gap: 1rem;
+}
+
+input[type="text"], input[type="password"] {
+	font-family: 'Actor';
+	border: 1px solid #CCCCCC;
+	padding: 10px 15px;
+	width: 300px;
+	background-color: inherit;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+	border: 1px solid #000000;
+}
+
+button {
+	font-family: 'Actor';
+	background-color: #000000;
+	color: #FFFFFF;
+	border: 0px;
+	border-radius: 3px;
+	cursor: pointer;
+	width: 65px;
+	height: 40px;
+}
+
+button:hover {
+	background-color: #666666;
+	border: 1px solid #000000;
+}
+
+.p-t-5 {
+	padding-top: 5px;
+}
+
+.p-t-10 {
+	padding-top: 10px;
+}
+
+.p-l-5 {
+	padding-left: 5px;
+}
+
+.p-l-10 {
+	padding-left: 10px;
+}
+
+.p-r-5 {
+	padding-right: 5px;
+}
+
+.p-r-10 {
+	padding-right: 10px;
+}
+
+.p-b-5 {
+	padding-bottom: 5px;
+}
+
+.p-b-10 {
+	padding-bottom: 10px;
+}
