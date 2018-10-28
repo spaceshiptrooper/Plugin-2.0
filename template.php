@@ -7,19 +7,47 @@ function template($bodys, $url = NULL) {
 
 	foreach($bodys AS $key => $body) {
 
-		if($body[0]['type'] == 'global') {
+		if(is_array($body[0]['type'])) {
 
-			$bod[$key] = $body[0]['content'];
+			foreach($body[0]['type'] AS $keys => $value) {
+
+				if($body[0]['type'] == 'global') {
+
+					$bod[$key] = $body[0]['content'];
+
+				} else {
+
+					if($url == $value OR $value == 'home' AND $url == NULL OR $value == 'index' AND $url == NULL) {
+
+						$bod[$key] = $body[0]['content'];
+
+					} else {
+
+						unset($body[$key]);
+
+					}
+
+				}
+
+			}
 
 		} else {
 
-			if($url == $body[0]['type']) {
+			if($body[0]['type'] == 'global') {
 
 				$bod[$key] = $body[0]['content'];
 
 			} else {
 
-				unset($bodys[$key]);
+				if($url == $body[0]['type']) {
+
+					$bod[$key] = $body[0]['content'];
+
+				} else {
+
+					unset($bodys[$key]);
+
+				}
 
 			}
 
