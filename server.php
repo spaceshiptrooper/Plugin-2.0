@@ -28,6 +28,8 @@ function server() {
 	define('SERVER_NAME', $_SERVER['SERVER_NAME']); // Create a constant called SERVER_NAME and append $_SERVER['SERVER_NAME'] to it
 	define('REQUEST_URI', $_SERVER['REQUEST_URI']); // Create a constant called REQUEST_URI and append $_SERVER['REQUEST_URI'] to it
 
-	define('LINK', HTTP . SERVER_NAME); // Create a constant called LINK and append both HTTP and SERVER_NAME
+	$uri = strtr($_SERVER['PHP_SELF'], ['/index.php' => '']);
+
+	define('LINK', HTTP . SERVER_NAME . $uri); // Create a constant called LINK and append both HTTP and SERVER_NAME
 
 }
