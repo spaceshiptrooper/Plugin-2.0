@@ -31,5 +31,7 @@ function server() {
 	$uri = strtr($_SERVER['PHP_SELF'], ['/index.php' => '']);
 
 	define('LINK', HTTP . SERVER_NAME . $uri); // Create a constant called LINK and append both HTTP and SERVER_NAME
+	define('AUTHOR', '<br><br> &copy; 2019 <a href="https://sitepoint.com/community/u/spaceshiptrooper">spaceshiptrooper</a>');
+	define('SEPARATOR', '<span class="separator p-r-10"></span>');
 
 }

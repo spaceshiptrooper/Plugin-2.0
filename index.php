@@ -2,9 +2,7 @@
 define('DS', '/'); // Define the Directory Separator
 define('ROOT', realpath(__DIR__) . DS); // Define the root folder and append DS after it
 define('THEMES', 'themes' . DS); // Define the themes folder and append DS after it
-define('CURRENT_THEME', 'default' . DS); // Define the current themes folder and append DS after it
 define('PLUGINS', 'plugins' . DS); // Define the plugins folder and append DS after it
-define('TITLE', 'Project'); // Define the title
 define('REMOTE_ADDRESS', $_SERVER['REMOTE_ADDR']);
 
 // Search through all the folders within the plugin folder for the bootstrap files.
@@ -12,6 +10,7 @@ $bootstraps = glob(ROOT . PLUGINS . '*' . DS . 'bootstrap.php');
 
 require_once ROOT . 'hook.php'; // Require the hook file
 require_once ROOT . 'server.php'; // Require the hook file
+require_once ROOT . 'constants.php'; // User defined constants
 
 server();
 

@@ -75,6 +75,14 @@ function template($bodys, $url = NULL) {
 
 	}
 
+	if(!defined('CURRENT_THEME')) {
+		define('CURRENT_THEME', 'default' . DS);
+	}
+
+	if(!defined('TITLE')) {
+		define('TITLE', 'Project');
+	}
+
 	if($url == NULL) {
 
 		return defaultTemplate($bodys);
@@ -91,6 +99,8 @@ function callConstant($m) {
 
 	if(defined($m[1])) {
 		return constant($m[1]);
+	} else {
+		return '{{' . $m[1] . '}}';
 	}
 
 }
@@ -108,9 +118,18 @@ function defaultTemplate($bodys) {
 	$header = file_get_contents(ROOT . THEMES . CURRENT_THEME . 'header.php');
 	$header = preg_replace_callback('/\{\{(.*?)\}\}/is', 'callConstant', $header);
 
+	$regex = [
+		'/\{\{BODY\}\}/is',
+	];
+
+	$return = [
+		$bodys,
+	];
+
 	$body = file_get_contents(ROOT . THEMES . CURRENT_THEME . 'body.php');
-	$body = preg_replace('/\{\{(.*?)\}\}/is', $bodys, $body);
+	$body = preg_replace($regex, $return, $body);
 	$body = strtr($body, [' {{BODY}} ' => '', ' {{BODY}}' => '', '{{BODY}} ' => '', '{{BODY}}' => '']);
+	$body = preg_replace_callback('/\{\{(.*?)\}\}/is', 'callConstant', $body);
 
 	$footer = file_get_contents(ROOT . THEMES . CURRENT_THEME . 'footer.php');
 	$footer = preg_replace_callback('/\{\{(.*?)\}\}/is', 'callConstant', $footer);
@@ -126,15 +145,33 @@ function dynamicTemplate($bodys, $url) {
 
 	if(file_exists(ROOT . THEMES . CURRENT_THEME . $url . '.php')) {
 
+		$regex = [
+			'/\{\{BODY\}\}/is',
+		];
+
+		$return = [
+			$bodys,
+		];
+
 		$body = file_get_contents(ROOT . THEMES . CURRENT_THEME . $url . '.php');
-		$body = preg_replace('/\{\{(.*?)\}\}/is', $bodys, $body);
+		$body = preg_replace($regex, $return, $body);
 		$body = strtr($body, [' {{BODY}} ' => '', ' {{BODY}}' => '', '{{BODY}} ' => '', '{{BODY}}' => '']);
+		$body = preg_replace_callback('/\{\{(.*?)\}\}/is', 'callConstant', $body);
 
 	} else {
 
+		$regex = [
+			'/\{\{BODY\}\}/is',
+		];
+
+		$return = [
+			$bodys,
+		];
+
 		$body = file_get_contents(ROOT . THEMES . CURRENT_THEME . '404.php');
-		$body = preg_replace('/\{\{(.*?)\}\}/is', $bodys, $body);
+		$body = preg_replace($regex, $return, $body);
 		$body = strtr($body, [' {{BODY}} ' => '', ' {{BODY}}' => '', '{{BODY}} ' => '', '{{BODY}}' => '']);
+		$body = preg_replace_callback('/\{\{(.*?)\}\}/is', 'callConstant', $body);
 
 	}
 
